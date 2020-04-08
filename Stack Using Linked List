@@ -1,0 +1,108 @@
+/* Code Copyright by AYUSH SAXENA*/
+
+#include<stdio.h>
+#include<conio.h>
+#include<stdlib.h>
+
+struct node
+{
+int data;
+struct node *nextlink;
+struct node *prevlink;
+}*top=NULL,*temp,*new1;
+
+void push();
+void pop();
+void display();
+
+void main()
+{
+int num;
+clrscr();
+while(1)
+{
+printf("\n*** STACK OPERATIONS LL ***\n");
+printf("1.PUSH\n2.POP\n3.DISPLAY\n4.EXIT\n");
+printf("Enter your Choice:");
+scanf("%d",&num);
+
+switch(num)
+{
+case 1:
+push();
+break;
+case 2:
+pop();
+break;
+case 3:
+display();
+break;
+case 4:
+exit(0);
+break;
+default:
+printf("\nWrong Choice!!");
+break;
+}
+}
+}
+void push()
+{
+int n;
+new1=(struct node*)malloc(sizeof(struct node));
+printf("Enter the value:");
+scanf("%d",&n);
+new1->data=n;
+new1->prevlink=NULL;
+new1->nextlink=NULL;
+if(top==NULL)
+{
+top=new1;
+}
+else
+{
+top->nextlink=new1;
+new1->prevlink=top;
+top=new1;
+}
+}
+
+void pop()
+{
+if(top==NULL)
+{
+printf("\nStack is Empty!!");
+}
+else if(top->prevlink==NULL && top->nextlink==NULL)
+{
+printf("\n%d is a deleted element",top->data);
+free(top);
+top=NULL;
+}
+else
+{
+temp=top;
+top=temp->prevlink;
+printf("\n%d is a deleted element",temp->data);
+free(temp);
+top->nextlink=NULL;
+}
+}
+
+void display()
+{
+if(top==NULL)
+{
+printf("\nSTACK IS EMPTY!!\n");
+}
+else
+{
+temp=top;
+while(temp->prevlink!=NULL)
+{
+printf("%d\n",temp->data);
+temp=temp->prevlink;
+}
+printf("%d\n",temp->data);
+}
+}

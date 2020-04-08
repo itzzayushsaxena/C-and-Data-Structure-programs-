@@ -1,0 +1,31 @@
+#include<stdio.h>
+#include<conio.h>
+int j,h=0;
+int b[64];
+void binary(int n)
+{
+while(n>0)
+{
+b[h]=n%2;
+n=n/2;
+h++;
+}
+for(j=h-1;j>=0;j--)
+{
+printf("%d",b[j]);
+}
+printf("\n");
+}
+void main()
+{
+int n;
+clrscr();
+
+printf("\nenter the number to get the binary =");
+scanf("%d",&n);
+
+binary(n);
+
+getch();
+
+}

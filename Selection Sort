@@ -1,0 +1,42 @@
+#include<stdio.h>
+#include<conio.h>
+#include<stdlib.h>
+
+void main()
+{
+ int *a,i,size,j,temp,min;
+ clrscr();
+
+ printf("ENTER THE SIZE OF ARRAY:");
+ scanf("%d",&size);
+
+ a=(int *)malloc(size*sizeof(int));
+
+ printf("\nENTER %d VALUES IN ARRAY: ",size);
+  for(i=0;i<size;i++)
+  {
+  scanf("%d",&a[i]);
+  }
+
+  for(i=0;i<size-1;i++)
+    {
+    min=i;
+      for(j=i+1;j<size;j++)
+      {
+	if(a[j]<a[min])
+	 {
+	  min=j;
+	 }
+      }
+      temp=a[i];
+      a[i]=a[min];
+      a[min]=temp;
+    }
+
+  printf("\nsorted list is:");
+  for(i=0;i<size;i++)
+  {
+  printf("%d\t",a[i]);
+  }
+getch();
+}

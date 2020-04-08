@@ -1,0 +1,60 @@
+#include<stdio.h>
+#include<conio.h>
+int top=-1,stack[63],r;
+enum bool{
+    false=1,true=0
+    }
+
+
+enum bool push(int r)
+{
+if(r%2==0)
+
+return true;
+
+if(r%2!=0)
+
+return (false);
+
+}
+
+void display()
+{
+int i;
+for(i=top;i>=0;i++)
+{
+printf("%d ",stack[top]);
+}
+}
+
+
+void main()
+{
+int n;
+clrscr();
+
+printf("\nenter the number to get the binary =");
+scanf("%d",&n);
+
+
+while(n!=NULL)
+{
+while(push)
+{
+if((r=n%2)==0)
+{
+top++;
+stack[top]=true;
+}
+if((r=n%2)!=0)
+{
+top++;
+stack[top]=false;
+}
+}
+r=n/2;
+push(r);
+}
+display();
+getch();
+}

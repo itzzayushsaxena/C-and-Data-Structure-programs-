@@ -1,0 +1,48 @@
+#include<stdio.h>
+#include<conio.h>
+
+void main()
+{
+int queue[100];
+int front=0,rear=0,log=0,sum,n,m;
+clrscr();
+printf("enter the value of n:");
+scanf("%d",&n);
+
+printf("enter the value of m:");
+scanf("%d",&m);
+
+while(rear<=m)
+{
+  if(front==0 && rear==0)
+   {
+    front=front+1;
+    queue[front]=0;
+    rear+=1;
+    while(rear<n)
+     {
+     queue[rear]=queue[front];
+     printf("%d->",queue[rear]);
+     rear+=1;
+     }
+    rear+=1;
+    queue[rear]=1;
+    printf("%d->",queue[rear]);
+   }
+  else
+   {
+   sum=0;
+   rear=rear+1;
+    while(log<rear)
+     {
+     sum=queue[log]+sum;
+     log++;
+     }
+     queue[rear]=sum;
+     printf("%d->",queue[rear]);
+     front=front+1;
+     log=front+1;
+   }
+}
+getch();
+}

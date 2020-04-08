@@ -1,0 +1,50 @@
+#include<stdio.h>
+#include<conio.h>
+#include<stdlib.h>
+
+void main()
+{
+ int *a,i,size,key,first=0,last,mid;
+ clrscr();
+
+ printf("ENTER THE SIZE OF ARRAY:");
+ scanf("%d",&size);
+
+ a=(int *)malloc(size*sizeof(int));
+
+ printf("\nENTER %d VALUES IN ARRAY: ",size);
+  for(i=0;i<size;i++)
+  {
+  scanf("%d",&a[i]);
+  }
+
+  printf("\nENTER THE VALUE YOU WANT TO FIND IN ARRAY:");
+  scanf("%d",&key);
+
+  last=size-1;
+  mid=(first+last)/2;
+
+  while(first<=last)
+  {
+    if(a[mid]==key)
+    {
+    printf("%d is located at %d index and %d position",key,mid,mid+1);
+    goto skip;
+    }
+    else if(a[mid]<key)
+    {
+    first=mid+1;
+    }
+    else
+    {
+    last=mid-1;
+    }
+    mid=(first+last)/2;
+  }
+  skip:
+  if(first>last)
+  {
+  printf("The element is not found");
+  }
+getch();
+}

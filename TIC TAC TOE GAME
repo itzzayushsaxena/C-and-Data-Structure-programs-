@@ -1,0 +1,155 @@
+#include<stdio.h>
+#include<conio.h>
+
+char a[3][3] = {{'1','2','3'},{'4','5','6'},{'7','8','9'}};
+char turn = 'x';
+char row,column;
+int i,j;
+int choice;
+enum bool{
+ false=0 , true=1
+};
+enum bool draw = false;
+
+void board()
+{
+for(i=0;i<3;i++)
+{
+for(j=0;j<3;j++)
+{
+clrscr();
+printf("\n\n    T I C  T A C  T O E\n\n");
+printf("\tPlayer1[x]\n");
+printf("\tPlayer2[o]\n\n");
+printf("\t\t     |     |     \n");
+printf("\t\t  %c  |  %c  |  %c \n",a[0][0],a[0][1],a[0][2]);
+printf("\t\t_____|_____|_____\n");
+printf("\t\t     |     |     \n");
+printf("\t\t  %c  |  %c  |  %c  \n",a[1][0],a[1][1],a[1][2]);
+printf("\t\t_____|_____|_____\n");
+printf("\t\t     |     |     \n");
+printf("\t\t  %c  |  %c  |  %c  \n",a[2][0],a[2][1],a[2][2]);
+printf("\t\t     |     |     \n");
+}
+}
+
+}
+
+
+void playerturn()
+{
+if(turn == 'x')
+printf("\n\tplayer1[x] turn:");
+
+if(turn == 'o')
+printf("\n\tplayer2[o] turn:");
+
+scanf("%d",&choice);
+switch(choice)
+{
+case 1:
+row=0;
+column=0;
+break;
+case 2:
+row=0;
+column=1;
+break;
+case 3:
+row=0;
+column=2;
+break;
+case 4:
+row=1;
+column=0;
+break;
+case 5:
+row=1;
+column=1;
+break;
+case 6:
+row=1;
+column=2;
+break;
+case 7:
+row=2;
+column=0;
+break;
+case 8:
+row=2;
+column=1;
+break;
+case 9:
+row=2;
+column=2;
+break;
+default:
+printf("Invalid Choice");
+break;
+}
+if(turn == 'x' && a[row][column]!='x' && a[row][column]!='o')
+{
+a[row][column] = 'x';
+turn='o';
+}
+else if(turn=='o' && a[row][column]!='x' && a[row][column]!='o')
+{
+a[row][column]='o';
+turn='x';
+}
+else
+{
+printf("Box Already Filled!\n ");
+printf("Please Try Again!\n\n");
+playerturn();
+}
+
+board();
+}
+enum bool gameover()
+{
+//check win
+for(i=0;i<3;i++)
+if(a[i][0] == a[i][1] && a[i][0] == a[i][2] || a[0][j] == a[1][j] && a[0][j] == a[2][j])
+return false;
+
+if(a[0][0]==a[1][1] && a[0][0]==a[2][2] || a[0][2]==a[1][1] && a[0][2]==a[2][0])
+return false;
+//if there is any box not filled
+for(i=0;i<3;i++)
+{
+for(j=0;j<3;j++)
+{
+if(a[i][j] != 'x' && a[i][j] != 'o')
+return true;
+}
+}
+
+draw = true;
+return false;
+}
+
+void main()
+{
+int c;
+clrscr();
+printf("\n\n    T I C  T A C  T O E\n\n");
+
+while(gameover())
+{
+board();
+playerturn();
+gameover();
+}
+if(turn == 'x'&& draw == false)
+printf("PLAYER1 [x] WINS!! CONGRATULATIONS\n\n");
+
+else if(turn == 'o' && draw == false)
+printf("PLAYER2 [o] WINS!! CONGRATULATIONS\n\n");
+
+else
+printf("GAME DRAW!!");
+getch();
+}
+
+

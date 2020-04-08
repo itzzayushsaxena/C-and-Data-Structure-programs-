@@ -1,0 +1,240 @@
+#include<stdio.h>
+#include<conio.h>
+#include<stdlib.h>
+
+struct node
+{
+int data;
+struct node *prevlink;
+struct node *nextlink;
+}*head=NULL,*temp,*new1,*new2,*new3,*new4,*new5,*new6;
+
+void insbeg();
+void inspos();
+void insend();
+int len();
+void display();
+void del();
+
+void main()
+{
+int n,i;
+clrscr();
+while(1)
+{
+printf("\n***** LINKED LIST OPERATIONS *****");
+printf("\n1.INSERT\n2.DELETE\n3.DiSPLAY\n4.EXIT");
+printf("\nENTER YOUR CHOICE: ");
+scanf("%d",&n);
+switch(n)
+{
+case 1:
+printf("\n***INSERT OPERATIONS***");
+printf("\n1.INSERT FROM BEGINNING\n2.INSERT FROM POSITION\n3.INSERT FROM END");
+printf("\nENTER YOUR CHOICE:");
+scanf("%d",&i);
+switch(i)
+{
+case 1:
+insbeg();
+break;
+case 2:
+inspos();
+break;
+case 3:
+insend();
+break;
+default:
+printf("WRONG CHOICE!!");
+break;
+}
+break;
+case 2:
+del();
+break;
+case 3:
+display();
+break;
+case 4:
+exit(0);
+break;
+default:
+printf("WRONG CHOICE!!!");
+}
+}
+}
+
+int len()
+{
+int count=0;
+temp=head;
+while(temp!=NULL)
+{
+count++;
+temp=temp->nextlink;
+}
+return count;
+}
+
+void insbeg()
+{
+int n;
+ new1=(struct node*)malloc(sizeof(struct node));
+ printf("Enter the data:");
+ scanf("%d",&n);
+ new1->data=n;
+ new1->prevlink = NULL;
+ new1->nextlink=NULL;
+ if(head==NULL)
+ {
+ head=new1;
+ }
+ else
+ {
+ new1->nextlink=head;
+ head=new1;
+ }
+}
+
+void insend()
+{
+int n;
+ new2=(struct node*)malloc(sizeof(struct node));
+ printf("Enter the data:");
+ scanf("%d",&n);
+ new2->data=n;
+ new2->nextlink = NULL;
+ new2->prevlink = NULL;
+  if(head==NULL)
+  {
+  head = new2;
+  }
+  else
+  {
+  temp=head;
+    while(temp->nextlink!=NULL)
+    {
+    temp=temp->nextlink;
+    }
+    temp->nextlink=new2;
+    new2->prevlink=temp;
+  }
+}
+
+void inspos()
+{
+int loc,length,i=1,n;
+printf("ENTER LOCATION:");
+scanf("%d",&loc);
+
+length=len();
+if(loc==length+1)
+{
+insend();
+}
+else if(loc>length && loc!=1)
+{
+printf("\nINVALID LOCATION");
+printf("\nCurrently list is having %d nodes",length);
+}
+else if(loc==0)
+{
+printf("\nINVALID LOCATION");
+}
+else
+{
+temp=head;
+while(i<loc-1)
+{
+temp=temp->nextlink;
+i++;
+}
+new3=(struct node*)malloc(sizeof(struct node));
+printf("\nENTER THE DATA:");
+scanf("%d",&n);
+new3->data=n;
+new3->nextlink=temp->nextlink;
+new5=new3->nextlink;
+new5->prevlink=new3;
+temp->nextlink=new3;
+new3->prevlink=temp;
+}
+}
+
+void del()
+{
+int loc,l,i=1;
+l=len();
+if(l==0)
+{
+printf("\nThere are very less element to delete!!");
+printf("\nCurrently list is having %d nodes",l);
+}
+else
+{
+printf("\nENTER THE LOCATION:");
+scanf("%d",&loc);
+
+if(loc>l)
+{
+printf("\nINVALID LOCATION!!");
+printf("\nCurrently list is having %d nodes",l);
+}
+else if(loc==0)
+{
+printf("\nINVALID LOCATION!!");
+}
+else if(loc==1)
+{
+temp=head;
+head=temp->nextlink;
+printf("%d is a deleted node",temp->data);
+head->prevlink=NULL;
+temp->nextlink=NULL;
+free(temp);
+}
+else
+{
+temp=head;
+while(i<loc-1)
+{
+temp=temp->nextlink;
+i++;
+}
+new4=temp->nextlink;
+if(new4->nextlink==NULL)
+{
+temp->nextlink=new4->nextlink;
+printf("%d is a deleted node",new4->data);
+new4->prevlink=NULL;
+free(new4);
+}
+else
+{
+new5=new4->nextlink;
+temp->nextlink=new4->nextlink;
+new5->prevlink=new4->prevlink;
+printf("%d is a deleted node",new4->data);
+new4->nextlink=NULL;
+new4->prevlink=NULL;
+free(new4);
+}
+}
+}
+}
+void display()
+{
+temp=head;
+if(temp==NULL)
+{
+printf("LINKED LIST IS EMPTY!!");
+}
+else
+{
+while(temp!=NULL)
+{
+printf("%d<=>",temp->data);
+temp=temp->nextlink;
+}
+}
+}

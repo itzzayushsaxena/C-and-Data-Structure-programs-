@@ -2,9 +2,42 @@
 #include<conio.h>
 #include<stdlib.h>
 
+void quicksort(int a[],int first, int last)
+{
+int i,j,pivot,temp;
+
+if(first<last)
+{
+pivot=first;
+i=first;
+j=last;
+
+while(i<j)
+{
+while(a[i]<=a[pivot] && i<last)
+i++;
+while(a[j]>a[pivot])
+j--;
+
+if(i<j)
+{
+temp=a[i];
+a[i]=a[j];
+a[j]=temp;
+}
+}
+temp=a[pivot];
+a[pivot]=a[j];
+a[j]=temp;
+quicksort(a,first,j-1);
+quicksort(a,j+1,last);
+}
+}
+
+
 void main()
 {
- int *a,i,size,j,temp,min;
+ int *a,i,size;
  clrscr();
 
  printf("ENTER THE SIZE OF ARRAY:");
@@ -18,22 +51,9 @@ void main()
   scanf("%d",&a[i]);
   }
 
-  for(i=0;i<size-1;i++)
-    {
-    min=i;
-      for(j=i+1;j<size;j++)
-      {
-	if(a[j]<a[min])
-	 {
-	  min=j;
-	 }
-      }
-      temp=a[i];
-      a[i]=a[min];
-      a[min]=temp;
-    }
+  quicksort(a,0,size-1);
 
-  printf("\nsorted list is:");
+  printf("Array after sorting:");
   for(i=0;i<size;i++)
   {
   printf("%d\t",a[i]);

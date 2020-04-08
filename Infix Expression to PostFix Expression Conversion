@@ -1,0 +1,80 @@
+#include<stdio.h>
+#include<conio.h>
+int top=-1;
+char stack[50];
+char x;
+
+void push(char x)
+{
+stack[++top]=x;
+}
+
+char pop()
+{
+if(x==-1)
+return -1;
+else
+return stack[top--];
+}
+
+int priority(char x)
+{
+if(x=='(')
+return 0;
+
+if(x=='+' || x=='-')
+return 1;
+
+if(x=='*' || x=='/')
+return 2;
+
+if(x=='$' || x=='%' || x=='^' || x=='#')
+return 3;
+
+else
+return 0;
+}
+
+
+void main()
+{
+char s[50],*p;
+clrscr();
+
+printf("\nEnter the expression:");
+scanf("%s",s);
+p=s;
+
+while(*p!=NULL)
+{
+if(isalnum(*p))
+{
+printf("%c",*p);
+}
+else if(*p=='(')
+{
+push(*p);
+}
+else if(*p==')')
+{
+while((x=pop()) != '(')
+printf("%c",x);
+}
+else
+{
+while(priority(stack[top]) >= priority(*p))
+{
+printf("%c",pop());
+}
+push(*p);
+}
+p++;
+}
+
+while(top != -1)
+{
+printf("%c",pop());
+}
+
+getch();
+}

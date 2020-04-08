@@ -1,0 +1,79 @@
+#include<stdio.h>
+#include<conio.h>
+
+int stack[5];
+int top=-1;
+
+void push()
+{
+if(top == 5)
+{
+printf("Stack is full");
+}
+else
+{
+top=top+1;
+printf("\nEnter the value in stack=");
+scanf("%d",&stack[top]);
+}
+}
+
+void pop()
+{
+if(top == -1)
+printf("stack is empty");
+else
+{
+printf("\n%d is popped value",stack[top]);
+top=top-1;
+}
+}
+
+void display()
+{
+int i;
+if(top == -1)
+printf("stack is empty!!");
+else
+{
+for(i=top;i>=0;i--)
+{
+printf("%d\n",stack[i]);
+}
+}
+}
+
+
+void main()
+{
+int n;
+clrscr();
+while(1)
+{
+printf("\n***** STACK OPERATIONS *****");
+printf("\n1. PUSH");
+printf("\n2. POP");
+printf("\n3. DISPLAY");
+printf("\n4. EXIT");
+printf("\nenter your choice=");
+scanf("%d",&n);
+switch(n)
+{
+case 1:
+push();
+break;
+case 2:
+pop();
+break;
+case 3:
+display();
+break;
+case 4:
+exit(1);
+break;
+default:
+printf("Wrong Choice!!");
+}
+}
+
+}
